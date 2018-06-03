@@ -1,4 +1,5 @@
 // デモ用 mockAPI
+// http://chibinowa.net/note/vuejs/vue-14.html
 // import axios from 'axios'
 import find from 'lodash/find'
 import findIndex from 'lodash/findIndex'
