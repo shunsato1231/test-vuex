@@ -10,9 +10,9 @@ import cloneDeep from 'lodash/cloneDeep'
 const FloorDatabase = {
   autoincrement: 3,
   floor: [
-    { id: 1, name: 'フロア1', last-edit: 'Aさん' },
-    { id: 2, name: 'フロア2', last-edit: 'Bさん' },
-    { id: 3, name: 'フロア3', last-edit: 'Cさん' }
+    { id: 1, name: 'フロア1', editor: '', last_editor: 'Aさん' },
+    { id: 2, name: 'フロア2', editor: '', last_editor: 'Bさん' },
+    { id: 3, name: 'フロア3', editor: '', last-editor: 'Cさん' }
   ],
   fetch() {
     return { status: true, entry: this.floor }
@@ -24,7 +24,8 @@ const FloorDatabase = {
     const newdata = Object.assign({}, floor, {
       id: ++this.autoincrement,
       name: floor.name === '' ? 'noname' : floor.name,
-      last-edit: floor.last-edit === '' ? 'noname' : floor.last-edit
+			editor: floor.editor,
+      last_editor: floor.last_editor === '' ? 'noname' : floor.last_editor,
     })
     this.floor.push(newdata)
     return { status: true, entry: newdata }
@@ -44,15 +45,15 @@ const FloorDatabase = {
 const SeatsDatabase = {
   autoincrement: 9,
   seats: [
-    { id: 1, floor_id: 1, name: 'Aさん', width: 2, height: 3, pos_x: 3, pos_y: 4 },
-    { id: 2, floor_id: 1, name: 'Bさん', width: 2, height: 3, pos_x: 3, pos_y: 4 },
-    { id: 3, floor_id: 1, name: 'Cさん', width: 2, height: 3, pos_x: 3, pos_y: 4 },
-		{ id: 4, floor_id: 2, name: 'Aさん', width: 2, height: 3, pos_x: 3, pos_y: 4 },
-    { id: 5, floor_id: 2, name: 'Bさん', width: 2, height: 3, pos_x: 3, pos_y: 4 },
-    { id: 6, floor_id: 2, name: 'Cさん', width: 2, height: 3, pos_x: 3, pos_y: 4 },
-		{ id: 7, floor_id: 3, name: 'Aさん', width: 2, height: 3, pos_x: 3, pos_y: 4 },
-    { id: 8, floor_id: 3, name: 'Bさん', width: 2, height: 3, pos_x: 3, pos_y: 4 },
-    { id: 9, floor_id: 3, name: 'Cさん', width: 2, height: 3, pos_x: 3, pos_y: 4 }
+    { id: 1, floor_id: 1, name: 'Aさん', width: 2, height: 3, pos_x: 3, pos_y: 4, color:'#FFFFFF'},
+    { id: 2, floor_id: 1, name: 'Bさん', width: 2, height: 3, pos_x: 3, pos_y: 4, color:'#FFFFFF'},
+    { id: 3, floor_id: 1, name: 'Cさん', width: 2, height: 3, pos_x: 3, pos_y: 4, color:'#FFFFFF'},
+		{ id: 4, floor_id: 2, name: 'Aさん', width: 2, height: 3, pos_x: 3, pos_y: 4, color:'#FFFFFF'},
+    { id: 5, floor_id: 2, name: 'Bさん', width: 2, height: 3, pos_x: 3, pos_y: 4, color:'#FFFFFF'},
+    { id: 6, floor_id: 2, name: 'Cさん', width: 2, height: 3, pos_x: 3, pos_y: 4, color:'#FFFFFF'},
+		{ id: 7, floor_id: 3, name: 'Aさん', width: 2, height: 3, pos_x: 3, pos_y: 4, color:'#FFFFFF'},
+    { id: 8, floor_id: 3, name: 'Bさん', width: 2, height: 3, pos_x: 3, pos_y: 4, color:'#FFFFFF'},
+    { id: 9, floor_id: 3, name: 'Cさん', width: 2, height: 3, pos_x: 3, pos_y: 4, color:'#FFFFFF'}
   ],
   fetch(id) {
     return { status: true, entry: find(this.seats, o => o.floor_id === id) }
@@ -67,7 +68,8 @@ const SeatsDatabase = {
 				width: el.width,
 				height: el.height,
 				pos_x: el.pos_x,
-				pos_y: el.pos_y
+				pos_y: el.pos_y,
+				color: el.color,
 			})
 			this.seats.push(addData)
 		})
